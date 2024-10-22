@@ -16,7 +16,6 @@ export class AppComponent {
   ngOnInit(): void {
     this.http.get<Item[]>('/assets/items.json').subscribe(data => {
       this.items = data;
-      console.log(this.items); // Log to confirm data is loaded
     });
   }
 }

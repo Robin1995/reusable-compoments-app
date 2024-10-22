@@ -17,7 +17,6 @@ export class DynamicListComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.filteredItems = [...this.items];
-    console.log(this.items);
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['items'] && changes['items'].currentValue) {
