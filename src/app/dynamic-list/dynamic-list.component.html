@@ -1,0 +1,28 @@
+<div class="filter-sort-container">
+  <input
+    type="text"
+    placeholder="Filter by title or description..."
+    [(ngModel)]="filterText"
+    (input)="onFilterChange()"
+  />
+
+  <div class="sort-buttons">
+    <button (click)="onSortChange('title', 'asc')">Sort Title Ascending</button>
+    <button (click)="onSortChange('title', 'desc')">
+      Sort Title Descending
+    </button>
+    <button (click)="onSortChange('description', 'asc')">
+      Sort Description Ascending
+    </button>
+    <button (click)="onSortChange('description', 'desc')">
+      Sort Description Descending
+    </button>
+  </div>
+</div>
+
+<ul class="item-list">
+  <li *ngFor="let item of filteredItems">
+    <h3>{{ item.title }}</h3>
+    <p>{{ item.description }}</p>
+  </li>
+</ul>
