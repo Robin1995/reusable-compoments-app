@@ -1,29 +1,30 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Item } from '../interfaces';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dynamic-list',
   templateUrl: './dynamic-list.component.html',
   styleUrls: ['./dynamic-list.component.scss'],
 })
-export class DynamicListComponent implements OnInit {
+export class DynamicListComponent implements OnInit, OnChanges {
   @Input() items: Item[] = [];
   filteredItems: Item[] = [];
   filterText: string = '';
   sortField: 'title' | 'description' = 'title';
   sortOrder: 'asc' | 'desc' = 'asc';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor() {}
 
   ngOnInit(): void {
-    this.http.get<Item[]>('/assets/items.json').subscribe((data) => {
-      this.items = data;
-      this.filteredItems = [...this.items];
-    });
+    this.filteredItems = [...this.items];
+    console.log(this.items);
   }
-
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['items'] && changes['items'].currentValue) {
+      this.filteredItems = [...this.items];
+      this.onFilterChange();
+    }
+  }
   onFilterChange(): void {
     this.filteredItems = this.items.filter(
       (item) =>
