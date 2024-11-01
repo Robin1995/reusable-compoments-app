@@ -19,5 +19,36 @@
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 4px;
+
+    button {
+      float: right;
+      margin-top: -50px;
+      margin-right: 10px;
+    }
   }
+}
+.new-item-container {
+  display: none;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  &.visible {
+    display: flex;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
 }

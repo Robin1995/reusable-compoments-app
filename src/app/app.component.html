@@ -1,1 +1,5 @@
-<app-dynamic-list [items]="items"></app-dynamic-list>
+<app-dynamic-list
+  [items]="items"
+  (onAddNewItem)="addNewItem($event)"
+  (onDeleteItem)="deleteItem($event)"
+></app-dynamic-list>

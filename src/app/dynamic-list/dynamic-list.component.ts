@@ -1,6 +1,13 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Item } from '../interfaces';
-
 @Component({
   selector: 'app-dynamic-list',
   templateUrl: './dynamic-list.component.html',
@@ -10,9 +17,11 @@ export class DynamicListComponent implements OnInit, OnChanges {
   @Input() items: Item[] = [];
   filteredItems: Item[] = [];
   filterText: string = '';
-  sortField: 'title' | 'description' = 'title';
+  sortField: keyof Item = 'title';
   sortOrder: 'asc' | 'desc' = 'asc';
-
+  newItem: Item = { title: '', description: '' };
+  @Output() onAddNewItem = new EventEmitter<Item>();
+  @Output() onDeleteItem = new EventEmitter<Item>();
   constructor() {}
 
   ngOnInit(): void {
@@ -34,8 +43,14 @@ export class DynamicListComponent implements OnInit, OnChanges {
 
   sortItems(): void {
     this.filteredItems.sort((a, b) => {
-      const fieldA = a[this.sortField].toLowerCase();
-      const fieldB = b[this.sortField].toLowerCase();
+      const fieldA = a[this.sortField]?.toString().toLowerCase() ?? '';
+      const fieldB = b[this.sortField]?.toString().toLowerCase() ?? '';
+
+      if (typeof fieldA === 'string' && typeof fieldB === 'string') {
+        return this.sortOrder === 'asc'
+          ? fieldA.localeCompare(fieldB)
+          : fieldB.localeCompare(fieldA);
+      }
 
       if (fieldA < fieldB) return this.sortOrder === 'asc' ? -1 : 1;
       if (fieldA > fieldB) return this.sortOrder === 'asc' ? 1 : -1;
@@ -43,9 +58,25 @@ export class DynamicListComponent implements OnInit, OnChanges {
     });
   }
 
-  onSortChange(field: 'title' | 'description', order: 'asc' | 'desc'): void {
+  onSortChange(field: keyof Item, order: 'asc' | 'desc'): void {
     this.sortField = field;
     this.sortOrder = order;
     this.sortItems();
+  }
+
+  onAddItem(): void {
+    if (
+      this.newItem.title.trim() !== '' &&
+      this.newItem.description.trim() !== ''
+    ) {
+      this.onAddNewItem.emit(this.newItem);
+      this.newItem = { title: '', description: '' };
+    }
+  }
+  toogleNewItemContainer(container: HTMLDivElement) {
+    container.classList.toggle('visible');
+  }
+  deleteItem(item: Item) {
+    this.onDeleteItem.emit(item);
   }
 }

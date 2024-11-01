@@ -7,6 +7,8 @@
   />
 
   <div class="sort-buttons">
+    <button (click)="onSortChange('id', 'asc')">Sort by id Ascending</button>
+    <button (click)="onSortChange('id', 'desc')">Sort by id Descending</button>
     <button (click)="onSortChange('title', 'asc')">Sort Title Ascending</button>
     <button (click)="onSortChange('title', 'desc')">
       Sort Title Descending
@@ -19,10 +21,20 @@
     </button>
   </div>
 </div>
-
+<button (click)="toogleNewItemContainer(newItemContainer)">Add item</button>
+<div #newItemContainer class="new-item-container">
+  <input placeholder="type the item title" [(ngModel)]="newItem.title" />
+  <input
+    placeholder="Type the item description"
+    [(ngModel)]="newItem.description"
+  />
+  <button (click)="onAddItem()">Save</button>
+</div>
 <ul class="item-list">
   <li *ngFor="let item of filteredItems">
+    <span>{{ item.id }}</span>
     <h3>{{ item.title }}</h3>
     <p>{{ item.description }}</p>
+    <button (click)="deleteItem(item)">Remove</button>
   </li>
 </ul>
