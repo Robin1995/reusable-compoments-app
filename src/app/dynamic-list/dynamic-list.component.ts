@@ -8,10 +8,24 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Item } from '../interfaces';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 @Component({
   selector: 'app-dynamic-list',
   templateUrl: './dynamic-list.component.html',
   styleUrls: ['./dynamic-list.component.scss'],
+  animations: [
+    trigger('itemVisible', [
+      state('hidden', style({ opacity: 0, height: '0px' })),
+      state('visible', style({ opacity: 1, height: '*' })),
+      transition('hidden <=> visible', animate('0.3s ease-in-out')),
+    ]),
+  ],
 })
 export class DynamicListComponent implements OnInit, OnChanges {
   @Input() items: Item[] = [];
@@ -22,6 +36,7 @@ export class DynamicListComponent implements OnInit, OnChanges {
   newItem: Item = { title: '', description: '' };
   @Output() onAddNewItem = new EventEmitter<Item>();
   @Output() onDeleteItem = new EventEmitter<Item>();
+  isVisible: boolean = false;
   constructor() {}
 
   ngOnInit(): void {
@@ -78,5 +93,8 @@ export class DynamicListComponent implements OnInit, OnChanges {
   }
   deleteItem(item: Item) {
     this.onDeleteItem.emit(item);
+  }
+  toogleVisibility() {
+    this.isVisible = !this.isVisible;
   }
 }

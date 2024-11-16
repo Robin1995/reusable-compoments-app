@@ -21,8 +21,12 @@
     </button>
   </div>
 </div>
-<button (click)="toogleNewItemContainer(newItemContainer)">Add item</button>
-<div #newItemContainer class="new-item-container">
+<button (click)="toogleVisibility()">Add item</button>
+<div
+  #newItemContainer
+  [@itemVisible]="isVisible ? 'visible' : 'hidden'"
+  class="new-item-container"
+>
   <input placeholder="type the item title" [(ngModel)]="newItem.title" />
   <input
     placeholder="Type the item description"
