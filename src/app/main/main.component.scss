@@ -1,0 +1,96 @@
+.pdf-chat-container {
+  display: grid;
+  place-content: center;
+  height: 98vh;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin: 0;
+  background-color: #f1f5fe;
+}
+h1 {
+  text-align: center;
+}
+h5 {
+  color: #6b7280;
+}
+.intro-section {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  .intro-panel {
+    margin-top: 4rem;
+  }
+  .intro-text,
+  .file-name {
+    color: #6b7280;
+  }
+}
+
+.chat-section {
+  background-color: #fff;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  height: 307px;
+  overflow-y: scroll;
+  margin-bottom: 1rem;
+  max-width: 698px;
+  .message > strong {
+    margin-right: 0.5rem;
+  }
+}
+
+.chat-section::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.chat-section::-webkit-scrollbar-thumb {
+  background-color: #d9d9d9; /* Scrollbar color */
+  border-radius: 4px; /* Rounded corners of the scrollbar */
+}
+
+.chat-section::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Scrollbar color on hover */
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Track color */
+  border-radius: 4px; /* Rounded corners of the track */
+}
+
+.form-section {
+  display: flex;
+  align-items: center;
+}
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+::ng-deep p-fileupload {
+  .p-button {
+    border: none;
+    background: none;
+  }
+  .p-fileupload-basic .p-fileupload-choose plusicon {
+    display: none !important;
+  }
+
+  .p-fileupload-basic .p-fileupload-choose::before {
+    content: "";
+    background: url(../../assets/icons/attach-file.svg);
+    background-size: cover;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    background-position: center;
+  }
+}
+::ng-deep p-button {
+  button {
+    background-color: #007b97;
+    border: none;
+  }
+}

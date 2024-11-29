@@ -1,0 +1,66 @@
+<div class="pdf-chat-container">
+  <section class="intro-section">
+    <img
+      src="assets/img/AIWizard.png"
+      width="133px"
+      height="187"
+      alt="AI Wizard"
+      class="wizard-image"
+    />
+    <div class="intro-panel">
+      <h4>{{ title }}</h4>
+      <p class="intro-text">
+        Upload your Protocol File (PDF) and Generate a protocol with prompts
+      </p>
+      <span *ngIf="uploadedFileName" class="file-name">
+        {{ uploadedFileName }}
+      </span>
+    </div>
+  </section>
+  <section class="chat-section">
+    <h5>Chat</h5>
+    <div class="chat-messages">
+      <div *ngFor="let message of chatMessages">
+        <p class="message">
+          <strong>{{ message.author }}</strong>
+          <span>{{ message.content }}</span>
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="form-section">
+    <input
+      type="text"
+      pInputText
+      [(ngModel)]="userQuestion"
+      placeholder="Ask a question"
+      class="p-inputtext-lg"
+      style="width: 100%"
+    />
+    <p-fileUpload
+      name="pdfFile"
+      accept=".pdf"
+      (onSelect)="onFileUpload($event)"
+      [auto]="true"
+      [uploadIcon]="'pi-paperclip'"
+      mode="basic"
+    ></p-fileUpload>
+    <div style="display: flex; align-items: center">
+      <p-button
+        [icon]="'pi pi-check'"
+        (onClick)="submitQuestion()"
+        [rounded]="true"
+      >
+      </p-button>
+    </div>
+  </section>
+  <span *ngIf="isTextError" class="error-message"
+    >Please upload a PDF file and enter a question.</span
+  >
+</div>
+<div *ngIf="isLoading" class="overlay">
+  <p-progressSpinner 
+    styleClass="spinner" 
+    animationDuration=".5s">
+  </p-progressSpinner>
+</div>

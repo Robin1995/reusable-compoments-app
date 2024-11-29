@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+.overlay {
+  position: fixed; /* Fixed to the viewport */
+  top: 0; 
+  left: 0; 
+  width: 100%; /* Cover the entire screen */
+  height: 100%;
+  background-color: rgba(105, 103, 103, 0.5); /* Semi-transparent dark background */
+  z-index: 9999; /* Ensure it stays above all other content */
+  display: flex; /* Flexbox to center the spinner */
+  justify-content: center; /* Horizontal center */
+  align-items: center; /* Vertical center */
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+}
+
+.p-inputtext:hover {
+  border-color: #007B97; /* Border color on hover */
+}

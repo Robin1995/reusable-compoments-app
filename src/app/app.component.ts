@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Item } from './interfaces';
 import { ItemsServiceService } from './services/items-service.service';
@@ -9,7 +8,7 @@ import { ItemsServiceService } from './services/items-service.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'reusable-components-app';
+  title = 'Welcome to TrialPal AI Assistant';
   items: Item[] = [];
 
   constructor(private readonly itemsService: ItemsServiceService) {}
